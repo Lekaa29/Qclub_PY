@@ -1,0 +1,31 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+body {
+  background-color: wheat;
+}
+svg path{
+  fill: #00394f;
+  stroke: #eee;
+  stroke-width: .25;
+}
+svg path:hover{
+  fill: cyan;
+  transition: 0.6s;
+  cursor: pointer;
+}
+
+figure {
+  width: 300px;
+  background: wheat;
+  margin: 0 auto;
+}
+
+.static {
+  cursor: not-allowed;
+}
+
+.draggable {
+  cursor: move;
+}
