@@ -1,3 +1,4 @@
+
 let image = document.querySelector("#parImage");
 let svg = image.querySelector("svg");
 
@@ -8,27 +9,18 @@ let y = 0;
 let z = 0;
 let w = 0;
 
-window.onload = function() {
-  image.addEventListener('mousedown', startDrag);
-  image.addEventListener('mouseup', endDrag);
-  image.addEventListener('mouseleave', endDrag);
-}
+function startDrag(event) {
+  if (event.buttons !== 1) {
+    // Check if the left mouse button is pressed
+    return;
+  }
 
-function drag() {
-  event.preventDefault();
-
-
-  let X = (-((event.clientX - CTM.e) / CTM.a)) + 40;
-  let Y = (-((event.clientY - CTM.f) / CTM.d)) + 30;
-
-  svg.viewBox.baseVal.x = (X - x);
-  svg.viewBox.baseVal.y = (Y - y);
- 
-}
-
-
-function startDrag() {
   image.addEventListener('mousemove', drag);
+
+  var popup = document.getElementById('popupid');
+
+  popup.style.left = 0 + 'px';
+  popup.style.top = 0 + 'px';
 
   x = (-((event.clientX - CTM.e) / CTM.a)) + 40;
   y = (-((event.clientY - CTM.f) / CTM.d)) + 30;
@@ -47,45 +39,67 @@ function endDrag() {
 
 
 
-
-var path = document.getElementById('myPath');
-var popup = document.getElementById('popupid');
-
-// Add a click event listener to the path
-path.addEventListener('click', function (event) {
-    // Get the bounding box of the path
-    var pathRect = path.getBoundingClientRect();
-
-    var popup2 = document.getElementById("myPopup");
-    popup2.classList.toggle("show");
-
-    // Set the popup position above the path
-    // Calculate the position of the popup
-    
-
-    var popupX = pathRect.left + window.scrollX;
-    var popupY = pathRect.top + window.scrollY;
-
-    // Set the popup position
-    popup.style.left = popupX + 'px';
-    popup.style.top = popupY + 'px';
-
-    // Set the popup position
-    var x = event.clientX;
-    var y = event.clientY;
-   
-    popup.style.display = 'inline-block';
+function drag() {
+  event.preventDefault();
 
 
-});
+  let X = (-((event.clientX - CTM.e) / CTM.a)) + 40;
+  let Y = (-((event.clientY - CTM.f) / CTM.d)) + 30;
 
-// Add a click event listener to the document to hide the popup when clicked outside
-document.addEventListener('click', function (event) {
-    if (!path.contains(event.target) && !popup.contains(event.target)) {
-        // Clicked outside the path and popup, hide the popup
-        popup.style.display = 'none';
+  svg.viewBox.baseVal.x = (X - x);
+  svg.viewBox.baseVal.y = (Y - y);
+ 
+}
 
-        var popup2 = document.getElementById("myPopup");
-        popup2.classList.remove("show");
+
+
+window.onload = function() {
+  image.addEventListener('mousedown', startDrag);
+  //image.addEventListener('mouseup', endDrag);
+  //image.addEventListener('mouseleave', endDrag);
+  // Get all elements with the class "table"
+  document.addEventListener('mouseup', endDrag);
+  var tables = document.querySelectorAll('.table');
+
+
+  document.addEventListener('mouseup', function () {
+    var popup = document.getElementById('popupid');
+    popup.classList.remove('show');
+  });
+  
+  // Add click event listener to each table element
+  tables.forEach(function(table) {
+    table.addEventListener('click', function(event) {
+      // Get the bounding box of the clicked table
+      var tableRect = table.getBoundingClientRect();
+
+      // Get the popup element
+      var popup = document.getElementById('popupid');
+
+      // Toggle the "show" class on the popup to display or hide it
+     // popup.classList.toggle('show');
+
+      // Set the popup position above the clicked table
+      var popupX = tableRect.left + window.scrollX + tableRect.width / 2 - popup.offsetWidth / 2;
+      var popupY = tableRect.top + window.scrollY;
+
+      // Set the popup position
+      popup.style.left = popupX + 'px';
+      popup.style.top = popupY + 'px';
+
+      // Prevent the click event from propagating to the document click listener
+      event.stopPropagation();
+    });
+  });
+
+  // Add a click event listener to the document to hide the popup when clicked outside
+  document.addEventListener('click', function(event) {
+    var popup = document.getElementById('popupid');
+    if (!popup.contains(event.target)) {
+      // Clicked outside the popup, hide it
+      popup.style.left = 0 + 'px';
+    popup.style.top = 0 + 'px';
     }
-});
+    });
+  };
+

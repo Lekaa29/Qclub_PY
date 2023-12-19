@@ -11,13 +11,23 @@ views = Blueprint('views', __name__)
 @views.route('/')
 def welcome():
     
-    return render_template("map.html")
+    return render_template("mapq.html")
     
 
-@views.route('/home')
-@login_required
-def home():
-    return render_template("home.html", user=current_user)
+@views.route('/reserve', methods=["GET", "POST"])
+def reserve():
+    if request.method == "GET":
+        return render_template("addreservation.html")
+    else: 
+        name = request.form.get("name")
+        surname = request.form.get("surname")
+        email = request.form.get("email")
+        phone = request.form.get("number")
+        
+        league_id = request.form['leagueid']
+        table = Table.query.get(table_id)
+        
+        return render_template("mapq.html")
 
         
     

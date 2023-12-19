@@ -3,7 +3,7 @@
   padding: 0;
 }
 body {
-  background-color: wheat;
+  background-color: rgb(37, 27, 184);
 }
 svg path{
   fill: #00394f;
@@ -14,11 +14,45 @@ svg path:hover{
   fill: cyan;
   transition: 0.6s;
   cursor: pointer;
+
+}
+.table{
+  fill: #d0db30;
+  stroke: #eee;
+  stroke-width: .25;
 }
 
+.table:hover{
+  fill: rgb(180, 147, 0);
+  transition: 0.6s;
+  cursor: pointer;
+}
+/*
+svg rect{
+  fill: rgb(145, 130, 1);
+  stroke: #eee;
+  stroke-width: .25;
+}
+
+svg rect:hover{
+  fill: rgb(253, 253, 136);
+  cursor: pointer;
+
+}
+
+*/
+.reservations-container {
+  background-color: #4b72f5;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  width: 400px;
+  text-align: center;
+}
 figure {
-  width: 300px;
-  background: wheat;
+  width: auto;
+  height: auto;
+  position: absolute;
   margin: 0 auto;
 }
 
@@ -46,8 +80,8 @@ figure {
 
 .popup .popuptext {
   width: 160px;
-  background-color: #555;
-  color: #fff;
+  background-color: #000000;
+  color: #ffffff;
   text-align: center;
   border-radius: 6px;
   padding: 8px 0;
@@ -66,7 +100,7 @@ figure {
   margin-left: -5px;
   border-width: 5px;
   border-style: solid;
-  border-color: #555 transparent transparent transparent;
+  border-color: #000000 transparent transparent transparent;
 }
 
 /* Toggle this class when clicking on the popup container (hide and show the popup) */

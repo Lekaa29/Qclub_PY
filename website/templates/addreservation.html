@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="/static/addreservation.css" rel="stylesheet">
+  <title>Q club</title>
+</head>
+<body>
+
+  <div class="reservations-container">
+   
+
+        <form  action="/reserve" method="post">
+        <h2>Rezervacija</h2>
+
+        <label for="name">Ime:</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="surname">Prezime:</label>
+        <input type="text" id="surname" name="surname" required>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="number">Broj telefona:</label>
+        <input type="phone2numeric" id="number" name="number" required>
+
+
+        {% if message %}
+        <a id="error">{{ message }}</a> 
+        {% endif %}
+        <h3>Total: 5 EUR</h3>
+            <button type="submit">Plati</button>
+        </form>
+  
+</div>
+</body>
+</html> 

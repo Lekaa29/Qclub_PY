@@ -10,3 +10,11 @@ class User(db.Model, UserMixin):
     password = db.Column(db.String(150), unique=True)
     username = db.Column(db.String(150), unique=True)
     
+class Table(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    taken = db.Column(db.Boolean)
+    name = db.Column(db.String(150))
+    surname = db.Column(db.String(150))
+    email = db.Column(db.String(150))
+    phone = db.Column(db.String(150))
+    

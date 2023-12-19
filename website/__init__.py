@@ -2,6 +2,7 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from os import path 
 from flask_login import LoginManager
+from .models import User, Table
 
 db = SQLAlchemy()
 DB_NAME = "database.db"
@@ -25,7 +26,7 @@ def create_app():
     app.register_blueprint(views, url_prefix='/')
     app.register_blueprint(auth, url_prefix='/')
     
-    from .models import User
+    from .models import User, Table
     
     create_database(app)
     
@@ -40,4 +41,9 @@ def create_database(app):
     if not path.exists("webiste/" + DB_NAME):
         with app.app_context():
             db.create_all()
+            
+        for i in range(23):
+            new_table = Table(id=i)
+            db.session.add(new_table)
+            db.session.commit()
         print("Created Database!")
