@@ -79,6 +79,10 @@
   <div class="popup" id="popupid">
     <form action="/reserve" method="get">
       <button class="popuptext" id="myPopup">Reserve</button>
+      {% if id %}
+        <h1>{{id}}</h1>
+      {% endif %}
+
     </form>
   </div>
 

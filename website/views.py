@@ -24,10 +24,11 @@ def reserve():
         email = request.form.get("email")
         phone = request.form.get("number")
         
-        league_id = request.form['leagueid']
-        table = Table.query.get(table_id)
+        table_id = request.form['clickedTableIndex']
         
-        return render_template("mapq.html")
+        
+        
+        return render_template("mapq.html", id=table_id)
 
         
     

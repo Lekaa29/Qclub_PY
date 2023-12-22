@@ -4,6 +4,8 @@ let svg = image.querySelector("svg");
 
 let CTM = svg.getScreenCTM();
 
+let clickedTableIndex = null;
+
 let x = 0;
 let y = 0;
 let z = 0;
@@ -79,6 +81,8 @@ window.onload = function() {
       // Toggle the "show" class on the popup to display or hide it
      // popup.classList.toggle('show');
 
+      clickedTableIndex = index;
+
       // Set the popup position above the clicked table
       var popupX = tableRect.left + window.scrollX + tableRect.width / 2 - popup.offsetWidth / 2;
       var popupY = tableRect.top + window.scrollY;
@@ -89,7 +93,22 @@ window.onload = function() {
 
       // Prevent the click event from propagating to the document click listener
       event.stopPropagation();
+      
     });
+
+    const form = document.querySelector('form');
+    form.addEventListener('submit', function(event) {
+      // Access the clickedTableIndex here and include it in the form data
+      if (clickedTableIndex !== null) {
+        // Include clickedTableIndex in the form data
+        const input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = 'clickedTableIndex';
+        input.value = clickedTableIndex;
+        form.appendChild(input);
+      }
+    });
+
   });
 
   // Add a click event listener to the document to hide the popup when clicked outside
@@ -98,7 +117,8 @@ window.onload = function() {
     if (!popup.contains(event.target)) {
       // Clicked outside the popup, hide it
       popup.style.left = 0 + 'px';
-    popup.style.top = 0 + 'px';
+      popup.style.top = 0 + 'px';
+      clickedTableIndex = null;
     }
     });
   };
