@@ -79,21 +79,21 @@ window.onload = function() {
       var popup = document.getElementById('popupid');
 
       // Toggle the "show" class on the popup to display or hide it
-     // popup.classList.toggle('show');
+      popup.classList.toggle('show');
 
-      clickedTableIndex = index;
-
+      
       // Set the popup position above the clicked table
       var popupX = tableRect.left + window.scrollX + tableRect.width / 2 - popup.offsetWidth / 2;
       var popupY = tableRect.top + window.scrollY;
-
+      
       // Set the popup position
       popup.style.left = popupX + 'px';
       popup.style.top = popupY + 'px';
-
+      
       // Prevent the click event from propagating to the document click listener
       event.stopPropagation();
       
+      clickedTableIndex = index;
     });
 
     const form = document.querySelector('form');
