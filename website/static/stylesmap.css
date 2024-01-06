@@ -16,16 +16,32 @@ svg path:hover{
   cursor: pointer;
 
 }
-.table{
+
+.taken{
+  fill: #c42828;
+  stroke-width: .25;
+}
+
+.taken:hover{
+  fill: rgb(70, 5, 5);
+  transition: 0.6s;
+  cursor: pointer;
+}
+
+.free{
   fill: #d0db30;
   stroke: #eee;
   stroke-width: .25;
 }
 
-.table:hover{
+.free:hover{
   fill: rgb(180, 147, 0);
   transition: 0.6s;
   cursor: pointer;
+}
+
+.popuptext{
+  font-family: Arial, Helvetica, sans-serif;
 }
 /*
 svg rect{

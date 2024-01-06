@@ -56,12 +56,17 @@ function drag() {
 
 
 window.onload = function() {
+  
   image.addEventListener('mousedown', startDrag);
   //image.addEventListener('mouseup', endDrag);
   //image.addEventListener('mouseleave', endDrag);
   // Get all elements with the class "table"
   document.addEventListener('mouseup', endDrag);
+
+
   var tables = document.querySelectorAll('.table');
+
+  var rectElements = document.querySelectorAll('rect');
 
 
   document.addEventListener('mouseup', function () {
@@ -69,18 +74,66 @@ window.onload = function() {
     popup.classList.remove('show');
   });
   
+  rectElements.forEach(function(rect) {
+    rect.addEventListener('click', function(event) {
+      // Get the id of the clicked rect element
+      var clickedRectId = event.target.id;
+
+      var clickedTableIndex = event.target.getAttribute('data-table-index');
+  
+      // Do something with the id
+      console.log('Clicked rect element id:', clickedRectId);
+      console.log('Clicked clickedTableIndex:', clickedTableIndex);
+
+      //clickedTableIndex = clickedRectId;
+      
+      var hiddenInput = document.getElementById('clickedTableIndex');
+      hiddenInput.value = clickedTableIndex;
+
+  })});
+
   // Add click event listener to each table element
-  tables.forEach(function(table) {
+  tables.forEach(function(table, index) {
     table.addEventListener('click', function(event) {
+      console.log('clickedTableIndex:', clickedTableIndex);
+
       // Get the bounding box of the clicked table
       var tableRect = table.getBoundingClientRect();
 
       // Get the popup element
       var popup = document.getElementById('popupid');
 
+      var tables = tablesData; 
+      
+    
+      var tableOwner = tables[index];
+      console.log('Clicked table owner:', tables[index]);
+
+      var popupContent = document.getElementById('popupContent');
+
+      popupContent.innerHTML = '';
+
+      
+
+      if (table.classList.contains('taken')) {
+        // If taken, display a message instead of the button
+        var messageDiv = document.createElement('div');
+        messageDiv.classList.add('popuptext'); // Apply the same class as the button
+        messageDiv.innerText = tableOwner;
+        popupContent.appendChild(messageDiv);
+      } else {
+        // If free, display the button as usual
+        var reserveButton = document.createElement('button');
+        reserveButton.classList.add('popuptext');
+        reserveButton.id = 'myPopup';
+        reserveButton.innerText = 'Reserve';
+        popupContent.appendChild(reserveButton);
+
+        var hiddenInput = document.getElementById('clickedTableIndex');
+        hiddenInput.value = table.getAttribute('data-table-index');
+      }
       // Toggle the "show" class on the popup to display or hide it
       popup.classList.toggle('show');
-
       
       // Set the popup position above the clicked table
       var popupX = tableRect.left + window.scrollX + tableRect.width / 2 - popup.offsetWidth / 2;
@@ -92,22 +145,9 @@ window.onload = function() {
       
       // Prevent the click event from propagating to the document click listener
       event.stopPropagation();
-      
-      clickedTableIndex = index;
+    
     });
-
-    const form = document.querySelector('form');
-    form.addEventListener('submit', function(event) {
-      // Access the clickedTableIndex here and include it in the form data
-      if (clickedTableIndex !== null) {
-        // Include clickedTableIndex in the form data
-        const input = document.createElement('input');
-        input.type = 'hidden';
-        input.name = 'clickedTableIndex';
-        input.value = clickedTableIndex;
-        form.appendChild(input);
-      }
-    });
+    
 
   });
 

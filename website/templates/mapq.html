@@ -5,6 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="/static/stylesmap.css" rel="stylesheet">
   <title>Q club</title>
+
+  <script>
+    var tablesData = {{ tables | tojson }};
+  </script>
+
 </head>
 <body>
 
@@ -43,29 +48,29 @@
 
 
   
-  <rect class="table" stroke="#000" id="svg_1" height="100.00001" width="78.57143" y="497.14286" x="1524.28557" fill="#583f72"/>
-  <rect class="table {% if tables[1] == 1 %}taken{% else %}free{% endif %}" id="myPath" stroke="#000" id="svg_2" height="100.00001" width="47.14286" y="497.14286" x="1372.85704" fill="#583f72"/>
-  <rect class="table {% if tables[2] == 1 %}taken{% else %}free{% endif %}" stroke="#000" id="svg_3" height="100.00001" width="47.14286" y="497.14286" x="1245.71421" fill="#583f72"/>
-  <rect class="table {% if tables[3] == 1 %}taken{% else %}free{% endif %}"  stroke="#000" id="svg_4" height="47.14287" width="94.28571" y="335.71431" x="1031.42851" fill="#583f72"/>
-  <rect class="table {% if tables[4] == 1 %}taken{% else %}free{% endif %}"  stroke="#000" id="svg_6" height="47.14287" width="94.28571" y="220.00004" x="1034.28565" fill="#583f72"/>
-  <rect class="table {% if tables[5] == 1 %}taken{% else %}free{% endif %}"  stroke="#000" id="svg_7" height="100.00001" width="47.14286" y="80.00006" x="1135.71423" fill="#583f72"/>
-  <rect class="table {% if tables[6] == 1 %}taken{% else %}free{% endif %}"  stroke="#000" id="svg_8" height="100.00001" width="47.14286" y="81.42864" x="1248.57135" fill="#583f72"/>
-  <rect class="table {% if tables[7] == 1 %}taken{% else %}free{% endif %}" stroke="#000" id="svg_10" height="47.14287" width="94.28571" y="190.00005" x="1341.42847" fill="#583f72"/>
-  <rect class="table {% if tables[8] == 1 %}taken{% else %}free{% endif %}" stroke="#000" id="svg_11" height="52.85716" width="47.14286" y="85.71436" x="1449.99989" fill="#583f72"/>
-  <rect class="table {% if tables[9] == 1 %}taken{% else %}free{% endif %}" stroke="#000" id="svg_12" height="100.00001" width="47.14286" y="495.71428" x="750" fill="#583f72"/>
-  <rect class="table {% if tables[10] == 1 %}taken{% else %}free{% endif %}" stroke="#000" id="svg_13" height="100.00001" width="47.14286" y="500" x="532.85715" fill="#583f72"/>
-  <rect class="table {% if tables[11] == 1 %}taken{% else %}free{% endif %}" stroke="#000" id="svg_14" height="52.85716" width="47.14286" y="528.57144" x="424.28578" fill="#583f72"/>
-  <rect class="table {% if tables[12] == 1 %}taken{% else %}free{% endif %}" stroke="#000" id="svg_15" height="100.00001" width="47.14286" y="568.57142" x="288.57148" fill="#583f72"/>
-  <rect class="table {% if tables[13] == 1 %}taken{% else %}free{% endif %}" stroke="#000" id="svg_16" height="47.14287" width="94.28571" y="745.71421" x="144.28577" fill="#583f72"/>
-  <rect class="table {% if tables[14] == 1 %}taken{% else %}free{% endif %}" stroke="#000" id="svg_17" height="47.14287" width="94.28571" y="542.8571" x="144.28577" fill="#583f72"/>
-  <rect class="table {% if tables[15] == 1 %}taken{% else %}free{% endif %}" stroke="#000" id="svg_18" height="47.14287" width="94.28571" y="374.28572" x="145.71434" fill="#583f72"/>
-  <rect class="table {% if tables[16] == 1 %}taken{% else %}free{% endif %}" stroke="#000" id="svg_19" height="47.14287" width="94.28571" y="222.85716" x="148.57149" fill="#583f72"/>
-  <rect class="table {% if tables[17] == 1 %}taken{% else %}free{% endif %}" stroke="#000" id="svg_20" height="100.00001" width="47.14286" y="87.14291" x="270.00007" fill="#583f72"/>
-  <rect class="table {% if tables[18] == 1 %}taken{% else %}free{% endif %}" stroke="#000" id="svg_21" height="100.00001" width="47.14286" y="88.5715" x="402.85717" fill="#583f72"/>
-  <rect class="table {% if tables[19] == 1 %}taken{% else %}free{% endif %}" stroke="#000" id="svg_22" height="100.00001" width="47.14286" y="90.00007" x="612.85714" fill="#583f72"/>
-  <rect class="table {% if tables[20] == 1 %}taken{% else %}free{% endif %}" stroke="#000" id="svg_23" height="100.00001" width="47.14286" y="91.42862" x="755.71426" fill="#583f72"/>
-  <rect class="table {% if tables[21] == 1 %}taken{% else %}free{% endif %}" stroke="#000" id="svg_24" height="100.00001" width="47.14286" y="92.8572" x="899.99996" fill="#583f72"/>
-  <rect class="table {% if tables[22] == 1 %}taken{% else %}free{% endif %}" stroke="#000" id="svg_25" height="52.85716" width="47.14286" y="84.28579" x="504.28578" fill="#583f72"/>
+  <rect class="table {% if tables[0] != 0 %}taken{% else %}free{% endif %}" stroke="#000" id="svg_1" data-table-index="1" height="100.00001" width="78.57143" y="497.14286" x="1524.28557" fill="#583f72"/>
+  <rect class="table {% if tables[1] != 0 %}taken{% else %}free{% endif %}"  stroke="#000" id="svg_2" data-table-index="2" height="100.00001" width="47.14286" y="497.14286" x="1372.85704" fill="#583f72"/>
+  <rect class="table {% if tables[2] != 0 %}taken{% else %}free{% endif %}" stroke="#000" id="svg_3" data-table-index="3" height="100.00001" width="47.14286" y="497.14286" x="1245.71421" fill="#583f72"/>
+  <rect class="table {% if tables[3] != 0 %}taken{% else %}free{% endif %}"  stroke="#000" id="svg_4" data-table-index="4" height="47.14287" width="94.28571" y="335.71431" x="1031.42851" fill="#583f72"/>
+  <rect class="table {% if tables[4] != 0  %}taken{% else %}free{% endif %}"  stroke="#000" id="svg_6" data-table-index="5" height="47.14287" width="94.28571" y="220.00004" x="1034.28565" fill="#583f72"/>
+  <rect class="table {% if tables[5] != 0 %}taken{% else %}free{% endif %}"  stroke="#000" id="svg_7" data-table-index="6" height="100.00001" width="47.14286" y="80.00006" x="1135.71423" fill="#583f72"/>
+  <rect class="table {% if tables[6] != 0 %}taken{% else %}free{% endif %}"  stroke="#000" id="svg_8" data-table-index="7" height="100.00001" width="47.14286" y="81.42864" x="1248.57135" fill="#583f72"/>
+  <rect class="table {% if tables[7] != 0 %}taken{% else %}free{% endif %}" stroke="#000" id="svg_10" data-table-index="8" height="47.14287" width="94.28571" y="190.00005" x="1341.42847" fill="#583f72"/>
+  <rect class="table {% if tables[8] != 0 %}taken{% else %}free{% endif %}" stroke="#000" id="svg_11" data-table-index="9" height="52.85716" width="47.14286" y="85.71436" x="1449.99989" fill="#583f72"/>
+  <rect class="table {% if tables[9] != 0 %}taken{% else %}free{% endif %}" stroke="#000" id="svg_12" data-table-index="10" height="100.00001" width="47.14286" y="495.71428" x="750" fill="#583f72"/>
+  <rect class="table {% if tables[10] != 0 %}taken{% else %}free{% endif %}" stroke="#000" id="svg_13" data-table-index="11" height="100.00001" width="47.14286" y="500" x="532.85715" fill="#583f72"/>
+  <rect class="table {% if tables[11] != 0 %}taken{% else %}free{% endif %}" stroke="#000" id="svg_14" data-table-index="12" height="52.85716" width="47.14286" y="528.57144" x="424.28578" fill="#583f72"/>
+  <rect class="table {% if tables[12] != 0 %}taken{% else %}free{% endif %}" stroke="#000" id="svg_15" data-table-index="13" height="100.00001" width="47.14286" y="568.57142" x="288.57148" fill="#583f72"/>
+  <rect class="table {% if tables[13] != 0 %}taken{% else %}free{% endif %}" stroke="#000" id="svg_16" data-table-index="14" height="47.14287" width="94.28571" y="745.71421" x="144.28577" fill="#583f72"/>
+  <rect class="table {% if tables[14] != 0 %}taken{% else %}free{% endif %}" stroke="#000" id="svg_17" data-table-index="15" height="47.14287" width="94.28571" y="542.8571" x="144.28577" fill="#583f72"/>
+  <rect class="table {% if tables[15] != 0 %}taken{% else %}free{% endif %}" stroke="#000" id="svg_18" data-table-index="16" height="47.14287" width="94.28571" y="374.28572" x="145.71434" fill="#583f72"/>
+  <rect class="table {% if tables[16] != 0 %}taken{% else %}free{% endif %}" stroke="#000" id="svg_19" data-table-index="17" height="47.14287" width="94.28571" y="222.85716" x="148.57149" fill="#583f72"/>
+  <rect class="table {% if tables[17] != 0 %}taken{% else %}free{% endif %}" stroke="#000" id="svg_20" data-table-index="18" height="100.00001" width="47.14286" y="87.14291" x="270.00007" fill="#583f72"/>
+  <rect class="table {% if tables[18] != 0 %}taken{% else %}free{% endif %}" stroke="#000" id="svg_21" data-table-index="19" height="100.00001" width="47.14286" y="88.5715" x="402.85717" fill="#583f72"/>
+  <rect class="table {% if tables[19] != 0 %}taken{% else %}free{% endif %}" stroke="#000" id="svg_22" data-table-index="20" height="100.00001" width="47.14286" y="90.00007" x="612.85714" fill="#583f72"/>
+  <rect class="table {% if tables[20] != 0 %}taken{% else %}free{% endif %}" stroke="#000" id="svg_23" data-table-index="21" height="100.00001" width="47.14286" y="91.42862" x="755.71426" fill="#583f72"/>
+  <rect class="table {% if tables[21] != 0 %}taken{% else %}free{% endif %}" stroke="#000" id="svg_24" data-table-index="22" height="100.00001" width="47.14286" y="92.8572" x="899.99996" fill="#583f72"/>
+  <rect class="table {% if tables[22] != 0 %}taken{% else %}free{% endif %}" stroke="#000" id="svg_25" data-table-index="23" height="52.85716" width="47.14286" y="84.28579" x="504.28578" fill="#583f72"/>
 
 
   </g>
@@ -78,11 +83,8 @@
 
   <div class="popup" id="popupid">
     <form action="/reserve" method="get">
-      <button class="popuptext" id="myPopup">Reserve</button>
-      {% if id %}
-        <h1>{{id}}</h1>
-      {% endif %}
-
+      <div id="popupContent"></div>
+      <input type="hidden" name="clickedTableIndex" id="clickedTableIndex" value="">
     </form>
   </div>
 
