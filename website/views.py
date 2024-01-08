@@ -1,10 +1,12 @@
 from flask_login import login_required, current_user
 from flask import Blueprint, render_template, request, redirect, url_for
-from .models import User, Table
+from .models import User, Table, Party
 from werkzeug.security import generate_password_hash, check_password_hash
 from .models import db 
 from flask_login import login_user, login_required, logout_user, current_user
 import json
+from datetime import datetime
+
 views = Blueprint('views', __name__)
 
 
@@ -24,6 +26,17 @@ def welcome():
 def home():
     return redirect(url_for("views.welcome"))
     
+@views.route('/admin', methods=["GET", "POST"])
+def admin():
+    if request.method == "GET":
+        
+        parties2 = Party.query.all()
+        
+        parties = []
+        for party in parties2:
+            parties.append(party)
+        
+        return render_template("admin_home.html", parties=parties)
 
 @views.route('/reserve', methods=["GET", "POST"])
 def reserve():
@@ -66,4 +79,28 @@ def reserve():
         return render_template("mapq.html", tables=tables)
 
         
-    
+@views.route("/add-party", methods=["GET", "POST"])
+def add_party():
+    if request.method == "GET":
+        return render_template("add_party.html")
+    else:
+        name = request.form.get("name")
+        price = request.form.get("price")
+        date_str = request.form.get("date")
+        bottle = request.form.get("bottle")
+        
+        date = datetime.strptime(date_str, '%Y-%m-%d').date()
+
+        if bottle == "yes":
+            bottle_bool = 1
+        else:
+            bottle_bool = 0
+        
+        new_party = Party(name=name,res_price=price,date=date,bottle=bottle_bool)
+        db.session.add(new_party)
+        db.session.commit()
+            
+        print(name,price,date,bottle)
+        
+        return redirect(url_for("views.welcome"))
+        

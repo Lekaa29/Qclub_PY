@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/adminstyles.css">
+    <title>Party List</title>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+          <form action="/add-party" method="get">
+            <button type="submit" class="add-party-btn">Add Party</button>
+          </form>
+        </div>  
+        {% if parties %}
+            <div class="party-list">
+                <div class="party-header">
+                    <div>Date</div>
+                    <div>Name</div>
+                    <div>Price</div>
+                    <div>Bottle</div>
+                    <div></div>
+                </div>
+                {% for party in parties %}
+                    <div class="party-row">
+                        <div>{{ party.date }}</div>
+                        <div>{{ party.name }}</div>
+                        <div>{{ party.res_price }}</div>
+                        <div>{% if party.bottle == 1%}Yes{% else %}No{% endif %}</div>
+                        <div class="buttons">
+                          <button class="edit-btn">Edit</button>
+                          <button class="delete-btn">Delete</button>
+                        </div>
+                        
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p>No existing parties</p>
+        {% endif %}
+    </div>
+</body>
+</html>

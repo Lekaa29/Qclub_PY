@@ -1,0 +1,78 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background-color: rgb(26, 0, 56);
+}
+
+.container {
+  background-color: rgb(69, 28, 97);
+  max-width: 800px;
+  margin: 50px auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+}
+
+.header {
+  text-align: right;
+  margin-bottom: 20px;
+  color: #ffffff;
+}
+
+.add-party-btn {
+  background-color: #dedede;
+  color: rgb(0, 0, 0);
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.add-party-btn:hover{
+  background-color: #ffffff;
+}
+
+.party-list {
+  display: flex;
+  flex-direction: column;
+  color: #ffffff;
+}
+
+
+.buttons {
+  display: flex;
+  gap: 10px;  /* Adjust the gap as needed */
+}
+
+.party-header {
+  display: flex;
+  justify-content: space-between;
+  background-color: rgb(26, 0, 56);
+  padding: 10px;
+  font-weight: bold;
+}
+
+.party-row {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #ccc;
+  padding: 10px;
+}
+
+.edit-btn,
+.delete-btn {
+  background-color: #008CBA;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.edit-btn:hover{
+  background-color: #00bfff;
+}
+
+.delete-btn:hover{
+  background-color: #00bfff;
+}

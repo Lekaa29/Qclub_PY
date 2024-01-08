@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="/static/addreservation.css" rel="stylesheet">
+  <title>Q club</title>
+  <style>
+    /* Additional styles for better presentation */
+    label {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    .bottle-options {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .bottle-options label {
+      margin-bottom: 0;
+      display: flex;
+      align-items: center; /* Align items vertically */
+    }
+
+    .bottle-options select {
+      padding: 5px;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="reservations-container">
+   
+
+        <form  action="/add-party" method="post">
+        <h2>New Party</h2>
+
+        <label for="name">Party name:</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="date">Date</label>
+        <input type="date" id="date" name="date" required>
+
+        <label for="price">Reservation price:</label>
+        <input type="number" id="price" name="price" required>
+
+        <div class="bottle-options">
+          <label for="bottle">Bottle mandatory:</label>
+          <select id="bottle" name="bottle">
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+          </select>
+        </div>
+        <label></label>
+
+        {% if message %}
+        <a id="error">{{ message }}</a> 
+        {% endif %}
+            
+        <button type="submit">Add Party</button>
+        </form>
+  
+</div>
+</body>
+</html> 
