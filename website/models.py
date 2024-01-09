@@ -25,5 +25,6 @@ class Table(db.Model):
     surname = db.Column(db.String(150))
     email = db.Column(db.String(150))
     phone = db.Column(db.String(150))
+    bottle = db.Column(db.String(150), default="0")
     party_id = db.Column(db.Integer, db.ForeignKey('party.id'))
     

@@ -55,6 +55,14 @@ def admin():
         
         return render_template("admin_home.html", parties=parties)
 
+@views.route("/admin-tables", methods=["GET", "POST"])
+def admin_tables():
+    partyid = request.args.get("partyid")
+    party = Party.query.get(partyid)
+    tables = Table.query.filter_by(party_id=partyid).all()
+    
+    return render_template("admin_tables.html", tables=tables, party=party)
+
 @views.route('/reserve', methods=["GET", "POST"])
 def reserve():
     if request.method == "GET":
@@ -63,27 +71,37 @@ def reserve():
 
         party = Party.query.get(partyid)
         
-        return render_template("addreservation.html", party=party, table_index=clicked_table_index)
+        bottles = [
+            "Jack Daniels 0.75l 100.00 E",
+            "Vigor Vodka 0.75l 75.00 E",
+            "Pelinkovac 0.75l 70.00 E",
+            "Jägermeister 0.75l 90.00 E",
+            "Chivas Regal 12 0.75l 120.00 E",
+            "Grey Goose Vodka 0.75l 200.00 E",
+            "Hennessy VS Cognac 0.75l 110.00 E",
+            "Bombay Sapphire Gin 0.75l 75.00 E",
+            "Baileys Irish Cream 0.75l 78.00 E",
+            "Patrón Silver Tequila 0.75l 115.00 E"
+        ]
+        return render_template("addreservation.html", bottles=bottles, party=party, table_index=clicked_table_index)
     else: 
         name = request.form.get("name")
         surname = request.form.get("surname")
         email = request.form.get("email")
         phone = request.form.get("number")
         table_id = request.form.get("clickedTableIndex")
-        
+        bottle = request.form.get("selectedBottle")
         partyid = request.form.get("partyid")
-        party = Party.query.get(partyid)
         
-        for x in request.form.items():
-            print(x)
+        party = Party.query.get(partyid)
+
             
         table = Table.query.get(table_id)
-        
+        print(bottle)
         if table:
-            print(0,table.id,0)
             return render_template("taken.html")
         else:
-            new_table = Table(id=table_id, party_id=partyid, taken=1, name=name, surname=surname, email=email, phone=phone)
+            new_table = Table(id=table_id, bottle=bottle, party_id=partyid, taken=1, name=name, surname=surname, email=email, phone=phone)
             db.session.add(new_table)
             db.session.commit()
             
@@ -95,7 +113,6 @@ def reserve():
         for table in all_tables:
             tables[int(table.id)-1] = table.surname
         
-        print(tables)
             
         
                

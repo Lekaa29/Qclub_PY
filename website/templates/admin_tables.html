@@ -10,46 +10,35 @@
 
 </head>
 <body>
-
   <div class="topnav">
     <a href="/admin">Admin Home</a>
   </div>
-
+  
     <div class="container">
         <div class="header">
           <form action="/add-party" method="get">
-            <button type="submit" class="add-party-btn">Add Party</button>
+            <button type="submit" class="add-party-btn">Add Reservation</button>
           </form>
         </div>  
-        {% if parties %}
+        {% if tables %}
             <div class="party-list">
                 <div class="party-header">
-                    <div>Live</div>
-                    <div>Date</div>
                     <div>Name</div>
-                    <div>Price</div>
+                    <div>Email</div>
+                    <div>Phone</div>
                     <div>Bottle</div>
                     <div></div>
-                    <div></div>
                 </div>
-                {% for party in parties %}
+                {% for table in tables %}
                     <div class="party-row">
-                        {% if party.live == 0 %}
-                        <form action="/go-live" method="POST">
-                          <button class="start-btn">START</button>
-                          <input type="hidden" name="partyid" id="partyid" value="{{party.id}}">
-                        </form>
-                        {% else %}
-                        <form action="/stop-live" method="POST">
-                          <button class="stop-btn">STOP</button>
-                          <input type="hidden" name="partyid" id="partyid" value="{{party.id}}">
-                        </form>
-                        {% endif %}
+                        
 
-                        <div>{{ party.date }}</div>
-                        <div>{{ party.name }}</div>
-                        <div>{{ party.res_price }}</div>
-                        <div>{% if party.bottle == 1%}Yes{% else %}No{% endif %}</div>
+                        <div>{{ table.name }} {{table.surname}}</div>
+                        <div>{{ table.email }}</div>
+                        <div>{{ table.phone }}</div>
+                        {% if table.bottle != 0 %}
+                        <div>{{ table.bottle }}</div>
+                        {% endif %}
                         <div class="buttons">
 
                           <form action="/edit-party" method="GET">
@@ -62,17 +51,14 @@
                             <input type="hidden" name="partyid" id="partyid" value="{{party.id}}">
                           </form>
 
-                          <form action="/admin-tables" method="GET">
-                            <button class="tables-btn">Tables</button>
-                            <input type="hidden" name="partyid" id="partyid" value="{{party.id}}">
-                          </form>
+  
                         </div>
                         
                     </div>
                 {% endfor %}
             </div>
         {% else %}
-            <p>No existing parties</p>
+            <p>No reservations</p>
         {% endif %}
     </div>
 </body>

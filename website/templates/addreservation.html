@@ -28,6 +28,15 @@
         <label for="number">Broj telefona:</label>
         <input type="phone2numeric" id="number" name="number" required>
 
+        {% if party.bottle == 1 %}
+        <label for="bottle">Boca:</label>
+        <select name="selectedBottle" id="selectbottle">
+          {% for bottle in bottles %}
+            <option class="option" value="{{ bottle }}">{{ bottle }}</option>
+          {% endfor %}
+        </select>
+        {% endif %}
+
 
         {% if message %}
         <a id="error">{{ message }}</a> 
@@ -35,7 +44,7 @@
         <h3>Total: 5 EUR</h3>
             <button type="submit">Plati</button>
         </form>
-  
+      
 </div>
 </body>
 </html> 
