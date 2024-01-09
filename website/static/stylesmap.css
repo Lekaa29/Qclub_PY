@@ -57,6 +57,12 @@ svg rect:hover{
 }
 
 */
+
+h1{
+  font-family: Arial, sans-serif;
+  color: #ffffff;
+}
+
 .reservations-container {
   background-color: #4b72f5;
   border-radius: 8px;

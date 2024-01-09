@@ -5,15 +5,40 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="/static/addreservation.css" rel="stylesheet">
   <title>Q club</title>
-  
+  <style>
+    /* Additional styles for better presentation */
+    label {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    .bottle-options {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .bottle-options label {
+      margin-bottom: 0;
+      display: flex;
+      align-items: center; /* Align items vertically */
+    }
+
+    .bottle-options select {
+      padding: 5px;
+      border-radius: 4px;
+    }
+  </style>
 </head>
 <body>
 
   <div class="reservations-container">
    
 
-        <form  action="/add-party" method="post">
-        <h2>New Party</h2>
+        <form  action="/edit-party" method="post">
+        <h2>Edit {{ party.name }}</h2>
+
+        <input type="hidden" name="partyid" id="partyid" value="{{party.id}}">
 
         <label for="name">Party name:</label>
         <input type="text" id="name" name="name" required>

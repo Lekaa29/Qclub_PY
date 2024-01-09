@@ -68,11 +68,36 @@ body {
   border-radius: 3px;
   cursor: pointer;
 }
-
 .edit-btn:hover{
   background-color: #00bfff;
 }
-
 .delete-btn:hover{
   background-color: #00bfff;
 }
+
+.start-btn{
+  background-color: #078a00;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 3px;
+  cursor: pointer;
+
+}
+.start-btn:hover{
+  background-color: #0bda00;
+}
+
+.stop-btn{
+  background-color: #8a0000;
+  color: rgb(0, 0, 0);
+  border: none;
+  padding: 5px 10px;
+  border-radius: 3px;
+  cursor: pointer;
+
+}
+.stop-btn:hover{
+  background-color: #da0000;
+}
+

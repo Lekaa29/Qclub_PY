@@ -13,6 +13,12 @@ views = Blueprint('views', __name__)
 @views.route('/')
 def welcome():
     
+    parties = Party.query.filter_by(live=1).all()
+    
+    return render_template("home.html", parties=parties)
+
+@views.route('/home', methods=["GET", "POST"])
+def home():
     all_tables = Table.query.all()
         
     tables = [0 for i in range(23)]
@@ -21,10 +27,21 @@ def welcome():
         tables[int(table.id)-1] = table.surname
     
     return render_template("mapq.html", tables=tables)
-
-@views.route('/home', methods=["GET", "POST"])
-def home():
-    return redirect(url_for("views.welcome"))
+ 
+@views.route("/open-party", methods=["POST"])
+def open_party():
+    partyid = request.form.get("partyid")
+    print(partyid)
+    party = Party.query.get(partyid)
+    
+    all_tables = Table.query.filter_by(party_id=partyid).all()
+    tables = [0 for i in range(23)]
+    
+    for table in all_tables:
+        tables[int(table.id)-1] = table.surname
+        
+    return render_template("mapq.html", party=party, tables=tables)
+    
     
 @views.route('/admin', methods=["GET", "POST"])
 def admin():
@@ -42,14 +59,20 @@ def admin():
 def reserve():
     if request.method == "GET":
         clicked_table_index = request.args.get("clickedTableIndex")
+        partyid = request.args.get("partyid")
 
-        return render_template("addreservation.html", table_index=clicked_table_index)
+        party = Party.query.get(partyid)
+        
+        return render_template("addreservation.html", party=party, table_index=clicked_table_index)
     else: 
         name = request.form.get("name")
         surname = request.form.get("surname")
         email = request.form.get("email")
         phone = request.form.get("number")
         table_id = request.form.get("clickedTableIndex")
+        
+        partyid = request.form.get("partyid")
+        party = Party.query.get(partyid)
         
         for x in request.form.items():
             print(x)
@@ -60,7 +83,7 @@ def reserve():
             print(0,table.id,0)
             return render_template("taken.html")
         else:
-            new_table = Table(id=table_id, taken=1, name=name, surname=surname, email=email, phone=phone)
+            new_table = Table(id=table_id, party_id=partyid, taken=1, name=name, surname=surname, email=email, phone=phone)
             db.session.add(new_table)
             db.session.commit()
             
@@ -76,7 +99,7 @@ def reserve():
             
         
                
-        return render_template("mapq.html", tables=tables)
+        return render_template("mapq.html", tables=tables, party=party)
 
         
 @views.route("/add-party", methods=["GET", "POST"])
@@ -102,5 +125,67 @@ def add_party():
             
         print(name,price,date,bottle)
         
-        return redirect(url_for("views.welcome"))
+        return redirect(url_for("views.admin"))
+
+@views.route("/edit-party", methods=["GET", "POST"])
+def edit_party():
+    if request.method == "GET":
+        partyid = request.args.get("partyid")
         
+        party = Party.query.get(partyid)
+        
+        return render_template("edit_party.html", party=party)
+
+    else:
+        partyid = request.form.get("partyid")
+        
+        name = request.form.get("name")
+        price = request.form.get("price")
+        date_str = request.form.get("date")
+        bottle = request.form.get("bottle")
+        
+        party = Party.query.get(partyid)
+        
+        party.name = name
+        party.res_price = price
+        party.date = datetime.strptime(date_str, "%Y-%m-%d").date()
+        party.bottle = bottle
+        db.session.commit()
+        
+        return redirect(url_for("views.admin"))
+    
+@views.route("/remove-party", methods=["GET", "POST"])
+def del_party():
+    if request.method == "GET":
+        partyid = request.args.get("partyid")
+        
+        party = Party.query.get(partyid)
+        
+        return render_template("delete_party.html", party=party)
+    else:
+        partyid = request.form.get("partyid")
+        
+        party = Party.query.get(partyid)
+        
+        db.session.delete(party)
+        db.session.commit()
+        
+        return redirect(url_for("views.admin"))
+
+@views.route("go-live", methods=["POST"])
+def go_live():
+    partyid = request.form.get("partyid")    
+    party = Party.query.get(partyid)
+    party.live = 1
+    db.session.commit()
+    
+    return redirect(url_for("views.admin"))
+    
+@views.route("stop-live", methods=["POST"])
+def stop_live():
+    partyid = request.form.get("partyid")
+    party = Party.query.get(partyid)
+    party.live = 0
+    db.session.commit()
+    
+    return redirect(url_for("views.admin"))

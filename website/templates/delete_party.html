@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="/static/addreservation.css" rel="stylesheet">
+  <title>Q club</title>
+  <style>
+    /* Additional styles for better presentation */
+    label {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    .bottle-options {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .bottle-options label {
+      margin-bottom: 0;
+      display: flex;
+      align-items: center; /* Align items vertically */
+    }
+
+    .bottle-options select {
+      padding: 5px;
+      border-radius: 4px;
+    }
+
+    .confirmation-container {
+      margin-top: 20px;
+    }
+
+    .confirmation-container .buttons {
+      display: flex;
+      justify-content: center; /* Center the buttons */
+      margin-top: 10px; /* Add some top margin for better spacing */
+    }
+
+    .confirmation-container button {
+      margin-right: 10px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="reservations-container">
+      <div class="confirmation-container">
+        <h2>Are you sure you want to delete "{{ party.name }}" ?</h2>
+  
+        
+        <div class="buttons">
+          <form action="/remove-party" method="post">
+            <input type="hidden" name="partyid" id="partyid" value="{{party.id}}">
+            <button type="submit">Yes</button>
+          </form>
+
+          <form action="/admin" methods="get">
+            <button type="submit" onclick="window.location.href='/index'">No</button>
+          </form>
+        </div>
+    </div>
+  </div>
+</body>
+
+</html>

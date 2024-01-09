@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/static/adminstyles.css">
     <title>Party List</title>
+
+
 </head>
 <body>
     <div class="container">
@@ -17,6 +19,7 @@
         {% if parties %}
             <div class="party-list">
                 <div class="party-header">
+                    <div>Live</div>
                     <div>Date</div>
                     <div>Name</div>
                     <div>Price</div>
@@ -25,13 +28,33 @@
                 </div>
                 {% for party in parties %}
                     <div class="party-row">
+                        {% if party.live == 0 %}
+                        <form action="/go-live" method="POST">
+                          <button class="start-btn">START</button>
+                          <input type="hidden" name="partyid" id="partyid" value="{{party.id}}">
+                        </form>
+                        {% else %}
+                        <form action="/stop-live" method="POST">
+                          <button class="stop-btn">STOP</button>
+                          <input type="hidden" name="partyid" id="partyid" value="{{party.id}}">
+                        </form>
+                        {% endif %}
+
                         <div>{{ party.date }}</div>
                         <div>{{ party.name }}</div>
                         <div>{{ party.res_price }}</div>
                         <div>{% if party.bottle == 1%}Yes{% else %}No{% endif %}</div>
                         <div class="buttons">
-                          <button class="edit-btn">Edit</button>
-                          <button class="delete-btn">Delete</button>
+
+                          <form action="/edit-party" method="GET">
+                            <button class="edit-btn">Edit</button>
+                            <input type="hidden" name="partyid" id="partyid" value="{{party.id}}">
+                          </form>
+                          
+                          <form action="/remove-party" method="GET">
+                            <button class="delete-btn">Delete</button>
+                            <input type="hidden" name="partyid" id="partyid" value="{{party.id}}">
+                          </form>
                         </div>
                         
                     </div>

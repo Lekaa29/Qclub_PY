@@ -17,7 +17,27 @@ body {
   text-align: center;
 }
 
+select {
+  background-color: #1d1d1d;
+  color: #edc40f;
+  padding: 10px;
+  font-size: 16px;
+  margin-bottom: 15px;
+  border-radius: 0;
+}
+select option{
+  border-radius: 0; 
+}
+select:hover{
+  background-color: #000000; 
+}
+select option:hover {
+  background-color: #000000; 
+}
 
+.option:hover{
+  background-color: #000000; 
+}
 
 h2 {
     font-size: 30px;

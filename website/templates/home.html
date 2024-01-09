@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="/static/addreservation.css" rel="stylesheet">
+  <title>Q club</title>
+  <style>
+    /* Additional styles for better presentation */
+    .reservations-container {
+      text-align: center;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 20px;
+    }
+
+    h1, h2 {
+      margin-bottom: 10px;
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="reservations-container">
+    <form action="/open-party" method="POST">
+      <h1>Q Club Reservation</h1>
+      <h2>Select Party</h2>
+      <select name="selectedParty" id="selectedParty" onchange="updateHiddenInput()">
+        {% for party in parties %}
+          <option class="option" value="{{ party.id }}">{{ party.name }}</option>
+        {% endfor %}
+      </select>
+      <input type="hidden" name="partyid" id="partyid" value="{{ parties[0].id }}">
+      <button type="submit">See</button>
+    </form>
+
+    {% if message %}
+      <a id="error">{{ message }}</a> 
+    {% endif %}
+
+    <script>
+      function updateHiddenInput() {
+        var selectedOption = document.getElementById("selectedParty");
+        var hiddenInput = document.getElementById("partyid");
+
+        hiddenInput.value = selectedOption.value;
+      }
+    </script>
+  </div>
+</body>
+</html>

@@ -15,6 +15,7 @@ class Party(db.Model):
     date = db.Column(db.Date)
     res_price = db.Column(db.Integer)
     bottle = db.Column(db.Integer)
+    live = db.Column(db.Integer, default=0)
     tables = db.relationship('Table')
    
 class Table(db.Model):
